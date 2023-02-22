@@ -1,8 +1,8 @@
 {
-  "name": "salesforce-app",
+  "name": "lwc-emailtemplatereview",
   "private": true,
   "version": "1.0.0",
-  "description": "Salesforce App",
+  "description": "Renders email templates inside a LWC using org-default records for merge field population",
   "scripts": {
     "lint": "eslint **/{aura,lwc}/**",
     "test": "npm run test:unit",
