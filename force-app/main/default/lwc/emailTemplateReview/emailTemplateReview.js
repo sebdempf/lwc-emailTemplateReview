@@ -3,6 +3,7 @@ import { LightningElement, track } from "lwc";
 import getEmailFolders from "@salesforce/apex/EmailTemplateReview.getEmailFolders";
 import getEmailTemplates from "@salesforce/apex/EmailTemplateReview.getEmailTemplates";
 import getSelectedEmailTemplate from "@salesforce/apex/EmailTemplateReview.getSelectedEmailTemplate";
+import getOrgMyDomain from "@salesforce/apex/Utils.getOrgMyDomain";
 
 export default class EmailTemplateReview extends LightningElement {
   availableFolders;
@@ -15,6 +16,7 @@ export default class EmailTemplateReview extends LightningElement {
   noTextTemplateReady = false;
   textTemplateReady = false;
   navigationReady = false;
+  domainBase;
 
   @track selectedTemplateRenderURL;
   @track selectedTemplatePlainText;
@@ -25,6 +27,7 @@ export default class EmailTemplateReview extends LightningElement {
   //////////////////
 
   connectedCallback() {
+    this.initializeDomainBase();
     this.intializeFolderOptions();
     this.foldersReady = true;
 
@@ -42,6 +45,17 @@ export default class EmailTemplateReview extends LightningElement {
   //////////////////
   //RETRIEVE DATA //
   //////////////////
+
+  initializeDomainBase(){
+    getOrgMyDomain()
+    .then((result) => {
+      if(result != null){
+        this.domainBase = result;
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
 
   //Retrieve folder data
   intializeFolderOptions() {
@@ -179,13 +193,13 @@ export default class EmailTemplateReview extends LightningElement {
   }
 
   handleSettingsButton() {
-    let redirectUTL = `https://indigovolunteers.lightning.force.com/lightning/setup/CommunicationTemplatesEmail/home`;
-    window.open(redirectUTL, "_blank").focus();
+    let redirectURL = `https://${this.domainBase}.lightning.force.com/lightning/setup/CommunicationTemplatesEmail/home`;
+    window.open(redirectURL, "_blank").focus();
   }
 
   handleEditButton() {
-    let redirectUTL = `https://indigovolunteers.lightning.force.com/lightning/setup/CommunicationTemplatesEmail/page?address=%2F${this.selectedTemplateId}%3Fsetupid%3DCommunicationTemplatesEmail`;
-    window.open(redirectUTL, "_blank").focus();
+    let redirectURL = `https://${this.domainBase}.lightning.force.com/lightning/setup/CommunicationTemplatesEmail/page?address=%2F${this.selectedTemplateId}%3Fsetupid%3DCommunicationTemplatesEmail`;
+    window.open(redirectURL, "_blank").focus();
   }
 
   ///////////////////

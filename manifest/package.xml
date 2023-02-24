@@ -3,6 +3,8 @@
     <types>
         <members>EmailTemplateReview</members>
         <members>EmailTemplateReviewTest</members>
+        <members>Utils</members>
+        <members>UtilsTest</members>
         <name>ApexClass</name>
     </types>
     <types>
