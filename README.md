@@ -1,6 +1,6 @@
 # LWC Email Template Review
 
-This lightning web component let's users of an org view email templates without the need to enter Settings and navigate through the 'Send Test and Verify Merge Fields' dialog.
+This lightning web component let's users of an org view email templates without the need to enter Settings and navigate through the 'Send Test and Verify Merge Fields' dialog. 
 
 ![Demo](/assets/LWC_preview.jpg)
 
